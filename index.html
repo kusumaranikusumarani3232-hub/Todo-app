@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tasks</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var saved = localStorage.getItem("todo-theme");
+      var theme = saved === "dark" || saved === "light"
+        ? saved
+        : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>Tasks</h1>
+      <div class="header-actions">
+        <p class="count" id="count" aria-live="polite">0 left</p>
+        <button type="button" class="theme-toggle" id="theme-toggle">Dark</button>
+      </div>
+    </header>
+
+    <form class="add-form" id="add-form">
+      <label class="sr-only" for="task-input">New task</label>
+      <input
+        id="task-input"
+        type="text"
+        name="task"
+        placeholder="Add a task"
+        maxlength="200"
+        autocomplete="off"
+        required
+      >
+      <button type="submit">Add</button>
+    </form>
+
+    <ul class="list" id="list" aria-label="Task list"></ul>
+    <p class="empty" id="empty">Nothing here yet. Add a task above.</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
